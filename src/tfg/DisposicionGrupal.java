@@ -26,7 +26,7 @@ public class DisposicionGrupal {
         this.listaGrupos = listaPersonas;
     }
 
-    public double calculateOverallMean() {
+    public double calculaMediaTotal() {
         if (listaGrupos.isEmpty()) {
             return 0.0;
         }
@@ -38,7 +38,7 @@ public class DisposicionGrupal {
         return sum / listaGrupos.size();
     }
 
-    public double calculateRange() {
+    public double calculaRango() {
         if (listaGrupos.isEmpty()) {
             return 0.0;
         }
@@ -69,6 +69,6 @@ public class DisposicionGrupal {
             string = string + grupo.toString() + "\n";
         }
         string = string + "]\n";
-        return string + "|| Media total: " + calculateOverallMean() + ", Rango del grupo: " + calculateRange();
+        return string + "|| Media total: " + calculaMediaTotal() + ", Rango del grupo: " + calculaRango();
     }
 }

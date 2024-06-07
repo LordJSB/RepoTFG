@@ -7,12 +7,12 @@ public class Persona {
 
 	private final int id;
 	private final String nombre;
-	private final List<Integer> listaTensiones;
+	private final List<Integer> listAfinidad;
 
-	public Persona(int id, String nombre, List<Integer> listaTensiones) {
+	public Persona(int id, String nombre, List<Integer> listAfinidad) {
 		this.id = id;
 		this.nombre = nombre;
-		this.listaTensiones = listaTensiones;
+		this.listAfinidad = listAfinidad;
 	}
 
 	public double calcularTension(List<Persona> personasMesa) {
@@ -21,18 +21,17 @@ public class Persona {
 		}
 
 		int tensionConMesa = 0;
-		int personasMesaSizeMinusOne = personasMesa.size() - 1;
+		int tensionConGrupo = personasMesa.size() - 1;
 
 		for (Persona persona : personasMesa) {
-			if (persona != null && persona.id < listaTensiones.size()) {
-				tensionConMesa += listaTensiones.get(persona.id);
+			if (persona != null && persona.id < listAfinidad.size()) {
+				tensionConMesa += listAfinidad.get(persona.id);
 			}
 		}
-
-		return (double) tensionConMesa / personasMesaSizeMinusOne;
+		return (double) tensionConMesa / tensionConGrupo;
 	}
 
-	@Override
+	@Override // Sobreescribe el toString base de una clase Java para imprimirlo correctamente
 	public String toString() {
 		return nombre;
 	}
@@ -45,7 +44,7 @@ public class Persona {
 		return nombre;
 	}
 
-	public List<Integer> getListaTensiones() {
-		return Collections.unmodifiableList(listaTensiones);
+	public List<Integer> getListAfinidad() {
+		return Collections.unmodifiableList(listAfinidad);
 	}
 }

@@ -43,7 +43,7 @@ public class MainInterface extends JFrame {
 	 * Create the frame.
 	 */
 	public MainInterface(String nombreAutor, int numPersonas, int nGrupos, int nLimite) {
-		setTitle("NOMBRE NO RECOGIDO");
+		setTitle("NOMBRE NO RECOGIDO"); // Si sale este nombre, no se recogió satisfactoriamente de WelcomeInterface
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setPreferredSize(new Dimension(1200, 900));
 		panelPpal = new JPanel(new BorderLayout());
@@ -78,7 +78,7 @@ public class MainInterface extends JFrame {
 		tablaPpal.setModel(model);
 		tablaPpal.setDefaultRenderer(Object.class, new DiagonalCellRenderer());
 
-		// Crear un ComboBox editor para la tabla
+		// ComboBox especial para la tabla
 		JComboBox<ComboBoxItem> comboBox = new JComboBox<>();
 		comboBox.addItem(new ComboBoxItem(0, "0 - Indiferencia"));
 		comboBox.addItem(new ComboBoxItem(1, "1 - Muy cercano"));
@@ -135,22 +135,22 @@ public class MainInterface extends JFrame {
 			columna.setPreferredWidth(tamanioColumna);
 		}
 		rellenarCeros();
-		pack(); // Ajusta el tama o de la ventana autom ticamente
+		pack(); // Ajusta el tamaño de la ventana automáticamente
 		setLocationRelativeTo(null); // Centra la ventana en la pantalla
 	}
 
 	public int[][] getDatosTabla() {
-		int rowCount = tablaPpal.getRowCount();
-		int columnCount = tablaPpal.getColumnCount();
-		int[][] data = new int[rowCount][columnCount];
-		for (int i = 1; i < rowCount; i++) {
-			for (int j = 1; j < columnCount; j++) {
+		int fila = tablaPpal.getRowCount();
+		int columna = tablaPpal.getColumnCount();
+		int[][] datosTabla = new int[fila][columna];
+		for (int i = 1; i < fila; i++) {
+			for (int j = 1; j < columna; j++) {
 				if (tablaPpal.getValueAt(i, j) != null) {
-					data[i][j] = Integer.parseInt(tablaPpal.getValueAt(i, j).toString());
+					datosTabla[i][j] = Integer.parseInt(tablaPpal.getValueAt(i, j).toString());
 				}
 			}
 		}
-		return data;
+		return datosTabla;
 	}
 
 	private class DiagonalCellRenderer extends DefaultTableCellRenderer {
@@ -226,11 +226,11 @@ public class MainInterface extends JFrame {
 		// Distribuir personas en grupos
 		DisposicionGrupal disposicion = Distribucion.distribuir(personas, nGrupos, nLimite);
 
-		// Extraer los grupos de la disposici n
+		// Extraer los grupos de la disposición
 		List<Grupo> gruposGenerados = disposicion.getListaGrupos();
 
 		StringBuilder message = new StringBuilder();
-		message.append("Organizaci n  ptima:\n");
+		message.append("Organización óptima:\n");
 		for (Grupo grupo : gruposGenerados) {
 			message.append(grupo.toString()).append("\n");
 		}
